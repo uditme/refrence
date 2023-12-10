@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define endl "\n" 
+const int mod = 1e9 + 7;
+#define ll long long 
+// #define int long long 
+#define all(x) (x).begin(), (x).end() 
+#define inp(x) int x; cin>>x;
+#define sinp(x) string x; cin>>x;
+#define out(x) cout<<x<<endl;
+#define outv(x) for (auto &it : x) {cout<<it<<" ";}
+#define ter(x, y, z) cout << (x ? y : z) << endl;
+#ifndef ONLINE_JUDGE
+    void dbg_out() { cerr << endl; }
+    template<typename Head, typename... Tail>
+    void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
+    #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#else
+#endif
+
+class maths {
+    int value;
+    public:
+    void operator++ () {
+        cout<<++this-> value<<endl;
+    }
+
+    void operator++ (int n) {
+        cout<<this-> value++<<endl;
+    }
+    friend istream& operator >> (istream& input, maths &obj);
+    friend ostream& operator << (ostream& output, maths &obj);
+    
+};
+
+//istream & ostream is a class which is built somewhere....
+// and cout and cin are objects of those class...
+// and these two are the reasons that we can't make this overloading inside our (user defined) class as a memeber function....
+
+//and here we want to overload << & >> operators to these objects(i.e cin and cout)...
+//so this means >>/<< operator will be overloaded for cin/ cout's class (i.e istream/ ostream)...
+//that is why we give first parameter [istream& cin] which will be for cin in this case, and therefore we used cin's class as data type
+//just like we used our class name [maths &obj] maths as data type in parameter...
+istream& operator >> (istream& cin, maths &obj) {
+    cin>> obj.value;
+    return cin;
+}
+
+
+ostream& operator << (ostream& output/*cout*/, maths &obj) {
+    output<< obj.value;
+    return output; 
+}
+
+
+
+void solve () {
+    maths obj;
+    //istream object parameter >> our class(i.e maths) object parameter [--> syntax]..
+    cin>> obj;
+    cout<<obj;
+
+    return;
+
+}
+
+
+signed main(){
+    ios::sync_with_stdio(0);
+#ifndef ONLINE_JUDGE
+#else
+  cin.tie(0);cout.tie(0);
+#endif
+    int t;
+    t=1;
+    // cin>>t;
+    while(t--)solve();return 0;}
