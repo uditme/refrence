@@ -1,0 +1,86 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define endl "\n" 
+const int mod = 1e9 + 7;
+#define ll long long 
+// #define int long long 
+#define all(x) (x).begin(), (x).end() 
+#define inp(x) int x; cin>>x;
+#define sinp(x) string x; cin>>x;
+#define out(x) cout<<x<<endl;
+#define outv(x) for (auto &it : x) {cout<<it<<" ";}
+#define ter(x, y, z) cout << (x ? y : z) << endl;
+#ifndef ONLINE_JUDGE
+    void dbg_out() { cerr << endl; }
+    template<typename Head, typename... Tail>
+    void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
+    #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#else
+#endif
+
+//here T is data type that can be changed (custom)...
+template <typename T>
+T add(T x, T y) {
+    return x+y;
+}
+
+//or i can also change with multiple custom datatypes...
+template <typename T, typename U>
+U add(T x, U y) {
+    return x+y;
+}
+
+
+//Similiarly we can do for class with custom data types...
+template <typename T>
+class weight {
+    private:
+    T kg;
+    public:
+    void setData (T x) {
+        this-> kg= x;
+    }
+    T getData () {
+        return this-> kg;
+    } 
+};
+
+
+//templates reduce the overhead of writing multiple overloaded functions, like here....
+// class test {
+//     public:
+//     int add(int a, int b) {
+//         return a+b;
+//     }
+//     double add (double a , double b) {
+//         return a+b;
+//     }
+// };
+
+
+
+void solve () {
+    out(add<double> (1.1, 2.1))
+    out(add<int> (1, 2))
+
+
+    weight <int> obj;
+    obj.setData(75);
+    out(obj.getData())
+
+
+    return;
+
+}
+
+
+signed main(){
+    ios::sync_with_stdio(0);
+#ifndef ONLINE_JUDGE
+#else
+  cin.tie(0);cout.tie(0);
+#endif
+    int t;
+    t=1;
+    // cin>>t;
+    while(t--)solve();return 0;}
