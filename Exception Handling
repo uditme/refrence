@@ -1,0 +1,77 @@
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// int divide(int a, int b) {
+//     if (b == 0) {
+//         throw runtime_error("Division by zero");
+//     }
+//     return a / b;
+// }
+
+// int main() {
+//     try {
+//         int result = divide(10, 0);
+//         cout << "Result: " << result << std::endl;
+//     } 
+//     catch (runtime_error& ex) {
+//         cerr << "Error: " << ex.what() << std::endl;
+//     }
+
+//     return 0;
+// }
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define endl "\n" 
+const int mod = 1e9 + 7;
+#define ll long long 
+// #define int long long 
+#define all(x) (x).begin(), (x).end() 
+#define inp(x) int x; cin>>x;
+#define sinp(x) string x; cin>>x;
+#define out(x) cout<<x<<endl;
+#define outv(x) for (auto &it : x) {cout<<it<<" ";}
+#define ter(x, y, z) cout << (x ? y : z) << endl;
+#ifndef ONLINE_JUDGE
+    void dbg_out() { cerr << endl; }
+    template<typename Head, typename... Tail>
+    void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
+    #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#else
+#endif
+
+
+void solve () {
+    inp(a) inp(b)
+    int res;
+
+    try {
+        if (b==0) {          //put the condition here that could make error...
+            throw b;         //this will throw value of b to the catch block and the control will go to catch statement from here...
+        }
+        res= a/b;           //if error not occured simply calculate...
+        out(res)
+    }
+    catch (int excep) {      //the value of b is catched by excep parameter and we can print...
+        out("divide by 0 not allowed");
+    }
+
+
+
+    return;
+
+}
+
+
+signed main(){
+    ios::sync_with_stdio(0);
+#ifndef ONLINE_JUDGE
+#else
+  cin.tie(0);cout.tie(0);
+#endif
+    int t;
+    t=1;
+    // cin>>t;
+    while(t--)solve();return 0;}
