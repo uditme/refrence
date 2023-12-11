@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define endl "\n" 
+const int mod = 1e9 + 7;
+#define ll long long 
+// #define int long long 
+#define all(x) (x).begin(), (x).end() 
+#define inp(x) int x; cin>>x;
+#define sinp(x) string x; cin>>x;
+#define out(x) cout<<x<<endl;
+#define outv(x) for (auto &it : x) {cout<<it<<" ";}
+#define ter(x, y, z) cout << (x ? y : z) << endl;
+#ifndef ONLINE_JUDGE
+    void dbg_out() { cerr << endl; }
+    template<typename Head, typename... Tail>
+    void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
+    #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#else
+#endif
+
+//parent class..
+class animal {
+    public:
+    virtual void speak () {
+        cout<<"speaking"<<endl;
+    }
+};
+
+//child class..
+class dog: public animal {
+    public:
+    //function overriding done...by defining the same function again in child class...
+    void speak () {
+        cout<<"bhawww!! "<<endl;
+    }
+};
+
+void solve () {
+    //This is k/a Upcasting....
+
+
+    //the (*parent) is a pointer of an object of animal class...
+    animal *parent;
+    dog child;
+    //and if we put address of child class in that pointer...
+    parent= &child;
+    //then we can access the overided function of that child class by that parent class pointer only (*parent)..like this line below...
+    parent-> speak();
+
+    //note:  to work like this we have to use virtual keyword when we are defining that function in parent class...
+
+
+
+    //This is k/a Downcasting....
+    // dog *child;
+    // animal parent;
+    // child= (dog*)&parent;
+    // child->speak();
+    
+
+    return;
+
+}
+
+
+signed main(){
+    ios::sync_with_stdio(0);
+#ifndef ONLINE_JUDGE
+#else
+  cin.tie(0);cout.tie(0);
+#endif
+    int t;
+    t=1;
+    // cin>>t;
+    while(t--)solve();return 0;}
