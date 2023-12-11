@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define endl "\n" 
+const int mod = 1e9 + 7;
+#define ll long long 
+// #define int long long 
+#define all(x) (x).begin(), (x).end() 
+#define inp(x) int x; cin>>x;
+#define sinp(x) string x; cin>>x;
+#define out(x) cout<<x<<endl;
+#define outv(x) for (auto &it : x) {cout<<it<<" ";}
+#define ter(x, y, z) cout << (x ? y : z) << endl;
+#ifndef ONLINE_JUDGE
+    void dbg_out() { cerr << endl; }
+    template<typename Head, typename... Tail>
+    void dbg_out(Head H, Tail... T) { cerr << ' ' << H; dbg_out(T...); }
+    #define dbg(...) cerr << "(" << #__VA_ARGS__ << "):", dbg_out(__VA_ARGS__)
+#else
+#endif
+
+
+void solve () {
+    //taking input so that this input can be written on file..
+    string str;
+    getline(cin, str);
+
+    //fstream[class name] myfileinput[i created an object,now i can access member functions by it's objects] ("filename", [mode]);
+    //we can use ofstream in place of fstream to write in file...
+    fstream myfileinput ("abc.txt", ios::out| ios::app);
+    if (myfileinput.is_open()) {
+        myfileinput<<str;
+        myfileinput.close();
+    }
+    else {
+        out("error for opening the file to write!")
+    }
+
+
+
+    //we can use ifstream in place of fstream to read from file...
+    fstream myfileread ("abc.txt", ios::in);
+    if (myfileread.is_open()) {
+        string str;
+        while (getline(myfileread, str)) {
+            out(str)
+        }
+        myfileread.close();
+    }
+    else {
+        out("error for opening the file to read!")
+    }
+
+
+
+    //ios::out --> mode to write in file...
+    //ios::app --> mode to append in file...
+    //ios::in --> mode to read from file...
+    //ios::trunc --> mode to delete all data from file...
+
+
+
+
+
+    
+
+    return;
+
+}
+
+
+signed main(){
+    ios::sync_with_stdio(0);
+#ifndef ONLINE_JUDGE
+#else
+  cin.tie(0);cout.tie(0);
+#endif
+    int t;
+    t=1;
+    // cin>>t;
+    while(t--)solve();return 0;}
