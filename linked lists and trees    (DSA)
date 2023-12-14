@@ -1,0 +1,277 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+//for tree...
+class node {
+    public:
+    int data;
+    node *left, *right;
+};
+
+
+//for singlylinked list...
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+//for doublylinked list...
+struct Node1 {
+    int data;
+    struct Node1* prev;
+    struct Node1* next;
+};
+
+
+//creating binary tree...
+node *create () {
+    int x; cin>>x;
+    if (x==-1) {
+        return 0;
+    }
+    node *newnode;
+    newnode= new node;
+    newnode-> data= x;
+    newnode->left= create();
+    newnode->right= create();
+    return newnode;
+}
+
+//preorder
+void preorder (node *root) {
+    if (root==0) {
+        return;
+    }
+
+    cout<<root-> data;
+    preorder(root-> left);
+    preorder(root-> right);
+}
+
+//inorder
+void inorder(node *root) {
+    if (root==0) {
+        return;
+    }
+    inorder(root-> left);
+    cout<<root-> data<<" ";
+    inorder(root-> right);
+
+}
+
+//postorder
+void postorder(node* root) {
+    if (root=0) {
+        return;
+    }
+    postorder(root-> left);
+    postorder(root-> right);
+    cout<<root-> data;
+}
+
+
+
+
+
+
+//create singly linked list
+Node * linked(int i, int n, Node*head) {
+    Node *temp= new Node;
+    int d; cin>> d;
+    temp-> data= d;
+    if (i==n) {
+        temp-> next=0;
+        return temp;
+    }
+    temp-> next= linked(i+1, n, head);
+    return temp;
+}
+//display singly linked list
+void display(Node *head) {
+    if (head== 0) {
+        return;
+    }
+    cout<<head-> data<<" ";
+    display (head-> next);
+    return;
+}
+
+
+
+// delete a node in binary search tree
+node *delf (node *root, int &val) {
+    if (root-> left==0) {
+        val= root-> data;
+        node *temp= root-> right;
+        delete root;
+        return temp;
+    }
+    root-> left= delf (root-> left, val);
+    return root;
+}
+node *del (node *root, int val) {
+    if (root== 0) {
+        cout<<" not found";
+        return root;
+    }
+    if (root-> data== val) {
+        if (root-> left==0 && root-> right== 0) {
+            delete root;
+            return 0;
+        }
+        else if (root-> left==0 || root-> right== 0) {
+            if (root->left!= 0) {
+                node *temp= root-> left;
+                delete root;
+                return temp;
+            }
+            else {
+                node *temp= root-> right;
+                delete root;
+                return temp;
+            }
+        }
+        else {
+            root-> right= delf (root-> right, val);
+            root-> data= val;
+            return root;
+        }
+    }
+
+    if (val< root-> data) {
+        root-> left= del(root-> left, val);
+    }
+    else {
+        root-> right= del (root-> right, val);
+    }
+    return root;
+}
+
+
+
+
+
+//create Doubly Linked list
+Node1 *doubly (int i, int n, Node1 *head, Node1*temp) {
+    Node1 *newnode= new Node1;
+    int d; cin>>d;
+    newnode-> data= d;
+    if (i==n) {
+        newnode-> next=0;
+        newnode-> prev= temp;
+        return newnode;
+    }
+    newnode-> prev= temp;
+    temp= newnode;
+    newnode-> next= doubly(i+1, n, head, temp);
+    return newnode;
+}
+//display doubly linked list
+void dispdoubly(Node1 *head) {
+    if (head==0) {
+        return;
+    }
+    cout<<head-> data<<" ";
+    dispdoubly(head-> next);
+    return;
+}
+
+
+//reverse a singly linked list
+//initially cur= head and prev=0
+Node *reversesinglylinkedlist (Node *head ,Node *cur, Node *prev) {
+    if (cur== 0) {
+        head= prev;
+        return head;
+    }
+    Node *temp= cur-> next;
+    cur-> next= prev;
+    prev= cur;
+    head= reversesinglylinkedlist (head, temp, prev);
+    return head;
+}
+
+
+int main() {
+    node *root;
+    root= create();
+    // preorder (root); 
+    // inorder(root);
+    // postorder(root); 
+
+    // int i=1, n=5; 
+    // Node1 *head= doubly(i, n, 0/*head*/, 0);
+    // dispdoubly (head);
+
+    int val= 20;
+    root= del (root, val);
+    cout<<endl;
+    inorder(root);
+
+ return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // delete a node in binary search tree
+// void delf (node *root, int &val) {
+//     if (root-> left==0) {
+//         val= root-> data;
+//         return;
+//     }
+//     delf (root-> left, val);
+//     return;
+// }
+// node *del (node *root, int val) {
+//     if (root==0) {
+//         // cout<<"\nvalue doesn't exist";
+//         return root;
+//     }
+//     if (root-> data== val) {
+//         if (root-> left==0 && root-> right==0) {
+//             delete root;
+//             return 0;
+//         }
+//         else if (root-> left==0 || root-> right==0) {
+//             if (root-> left!=0) {
+//                 node *temp= root-> left;
+//                 delete root;
+//                 return temp;
+//             }
+//             else {
+//                 node *temp= root-> right;
+//                 delete root;
+//                 return temp;
+//             }
+//         }
+//         else {
+//             delf (root-> right, val);
+//             root-> right= del (root-> right, val);
+//             root-> data= val;
+//             return root;
+//         }
+//     }
+    
+//     if (root->data > val) {
+//         root-> left= del (root-> left, val);
+//     }
+//     else {
+//         root-> right= del (root-> right, val);
+//     }
+//     return root;
+// }
