@@ -16,6 +16,7 @@ struct Node {
     struct Node *next;
 };
 
+
 //for doublylinked list...
 struct Node1 {
     int data;
@@ -149,11 +150,48 @@ node *del (node *root, int val) {
 }
 
 
+//create circular doubly linked list...
+Node1 *circulardoubly (int i, int n, Node1 *prev) {
+    if (i==n) {
+        Node1 *newnode= new Node1;
+        int d; cin>>d;
+        newnode-> data= d;
+        newnode-> prev= prev;
+        newnode-> next= 0;
+        return newnode;
+    }
+    Node1 *newnode= new Node1;
+    int d; cin>> d;
+    newnode->data= d;
+    newnode-> prev= prev;
+    prev= newnode;
+    newnode-> next= circulardoubly (i+1, n, prev);
+    return newnode;
+}
+Node1 *traverse (Node1 *head) {
+    if (head-> next==0) {
+        return head;
+    }
+    head= traverse (head-> next);
+    return head;
+}
+//displaycircular doubly linked list...
+void displaycirculardoubly (Node1 *head, Node1 *temp) {
+    if (head-> next== temp) {
+        cout<<head-> data<<" ";
+        return;
+    }
+    cout<<head-> data<<" ";
+    displaycirculardoubly (head-> next, temp);
+    return;
+}
+
+
 
 
 
 //create Doubly Linked list
-Node1 *doubly (int i, int n, Node1 *head, Node1*temp) {
+Node1 *doubly (int i, int n, Node1*temp) {
     Node1 *newnode= new Node1;
     int d; cin>>d;
     newnode-> data= d;
@@ -164,7 +202,7 @@ Node1 *doubly (int i, int n, Node1 *head, Node1*temp) {
     }
     newnode-> prev= temp;
     temp= newnode;
-    newnode-> next= doubly(i+1, n, head, temp);
+    newnode-> next= doubly(i+1, n, temp);
     return newnode;
 }
 //display doubly linked list
@@ -175,6 +213,21 @@ void dispdoubly(Node1 *head) {
     cout<<head-> data<<" ";
     dispdoubly(head-> next);
     return;
+}
+
+//reverse a doubly linked list...
+Node1 *reversedoubly (Node1 *head) {
+    if (head-> next==0) {
+        Node1 *temp= head-> next;
+        head-> next= head-> prev;
+        head-> prev= temp;
+        return head;
+    }
+    Node1 *temp= head-> next;
+    head-> next= head-> prev;
+    head-> prev= temp;
+    head= reversedoubly (temp);
+    return head;
 }
 
 
@@ -194,8 +247,8 @@ Node *reversesinglylinkedlist (Node *head ,Node *cur, Node *prev) {
 
 
 int main() {
-    node *root;
-    root= create();
+    // node *root;
+    // root= create();
     // preorder (root); 
     // inorder(root);
     // postorder(root); 
@@ -204,10 +257,19 @@ int main() {
     // Node1 *head= doubly(i, n, 0/*head*/, 0);
     // dispdoubly (head);
 
-    int val= 20;
-    root= del (root, val);
-    cout<<endl;
-    inorder(root);
+    // int val= 20;
+    // root= del (root, val);
+    // cout<<endl;
+    // inorder(root);
+
+
+    int i=1, n=5;
+    Node1 *head= circulardoubly (i, n, 0);
+    Node1 *tail= traverse (head);
+    head-> prev= tail;
+    tail-> next= head;
+    displaycirculardoubly (head, head);
+
 
  return 0;
 }
@@ -275,3 +337,135 @@ int main() {
 //     }
 //     return root;
 // }
+
+
+
+
+#include <stdio.h>
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(int array[], int low, int high) {
+    int pivot = array[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; ++j) {
+        if (array[j] < pivot) {
+            ++i;
+            swap(&array[i], &array[j]);
+        }
+    }
+
+    swap(&array[i + 1], &array[high]);
+    return i + 1;
+}
+
+void quickSort(int array[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition(array, low, high);
+
+        quickSort(array, low, pivotIndex - 1);
+        quickSort(array, pivotIndex + 1, high);
+    }
+}
+
+int main() {
+    int array[] = {12, 4, 5, 6, 7, 3, 1, 15};
+    int arraySize = sizeof(array) / sizeof(array[0]);
+
+    quickSort(array, 0, arraySize - 1);
+
+    printf("Sorted array: ");
+    for (int i = 0; i < arraySize; ++i) {
+        printf("%d ", array[i]);
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void merge(int array[], int left, int middle, int right) {
+    int n1 = middle - left + 1;
+    int n2 = right - middle;
+
+    int* leftArray = (int*)malloc(n1 * sizeof(int));
+    int* rightArray = (int*)malloc(n2 * sizeof(int));
+
+    // Copy data to temporary arrays leftArray[] and rightArray[]
+    for (int i = 0; i < n1; ++i)
+        leftArray[i] = array[left + i];
+    for (int j = 0; j < n2; ++j)
+        rightArray[j] = array[middle + 1 + j];
+
+    // Merge the temporary arrays back into array[left..right]
+    int i = 0;
+    int j = 0;
+    int k = left;
+    while (i < n1 && j < n2) {
+        if (leftArray[i] <= rightArray[j]) {
+            array[k] = leftArray[i];
+            ++i;
+        } else {
+            array[k] = rightArray[j];
+            ++j;
+        }
+        ++k;
+    }
+
+    // Copy the remaining elements of leftArray[], if there are any
+    while (i < n1) {
+        array[k] = leftArray[i];
+        ++i;
+        ++k;
+    }
+
+    // Copy the remaining elements of rightArray[], if there are any
+    while (j < n2) {
+        array[k] = rightArray[j];
+        ++j;
+        ++k;
+    }
+
+    // Free the allocated memory for temporary arrays
+    free(leftArray);
+    free(rightArray);
+}
+
+void mergeSort(int array[], int left, int right) {
+    if (left < right) {
+        int middle = left + (right - left) / 2;
+
+        // Sort first and second halves
+        mergeSort(array, left, middle);
+        mergeSort(array, middle + 1, right);
+
+        // Merge the sorted halves
+        merge(array, left, middle, right);
+    }
+}
+
+int main() {
+    int array[] = {12, 4, 5, 6, 7, 3, 1, 15};
+    int arraySize = sizeof(array) / sizeof(array[0]);
+
+    mergeSort(array, 0, arraySize - 1);
+
+    printf("Sorted array: ");
+    for (int i = 0; i < arraySize; ++i) {
+        printf("%d ", array[i]);
+    }
+
+    return 0;
+}
