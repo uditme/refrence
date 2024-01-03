@@ -24,9 +24,10 @@ void solve () {
     string str;
     getline(cin, str);
 
-    //fstream[class name] myfileinput[i created an object,now i can access member functions by it's objects] ("filename", [mode]);
+    //fstream[class name, it means it is user defined data type] myfileinput[i created an object,now i can access member functions by it's objects] ("filename", [mode]);
     //we can use ofstream in place of fstream to write in file...
     fstream myfileinput ("abc.txt", ios::out| ios::app);
+    // myfileinput.open("abc.txt");   --> i can open a file like this...but, it is not to be used here bcz during creating the file it is opened by default...
     if (myfileinput.is_open()) {
         myfileinput<<str;
         myfileinput.close();
@@ -40,9 +41,9 @@ void solve () {
     //we can use ifstream in place of fstream to read from file...
     fstream myfileread ("abc.txt", ios::in);
     if (myfileread.is_open()) {
-        string str;
-        while (getline(myfileread, str)) {
-            out(str)
+        string str1;
+        while (getline(myfileread, str1)) {
+            cout<<str1;
         }
         myfileread.close();
     }
@@ -53,10 +54,33 @@ void solve () {
 
 
     //ios::out --> mode to write in file...
-    //ios::app --> mode to append in file...
+    //ios::app --> mode to append in file...--> everytime we perform write operation then whole file is overwritten , to continue appending we use append mode...
     //ios::in --> mode to read from file...
     //ios::trunc --> mode to delete all data from file...
 
+
+    //ofstream  --> used to create and write files...
+    //ifstream  --> used to read files...
+    //fstream  --> both read and write...
+
+
+    //header file used -->  #include<fstream>
+
+
+
+    // string str;
+    // getline(cin, str);
+    // ofstream myfileinput ("abc.text");
+    // myfileinput<< str;
+    // myfileinput.close();
+
+    // cout<<"file write operation successfully... "<<endl;
+
+    // ifstream myfileoutput ("abc.txt");
+    // string str1;
+    // getline(myfileoutput, str1);
+    // cout<< str1<<endl;
+    // cout<<"file write operation successfully... "<<endl;
 
 
 
